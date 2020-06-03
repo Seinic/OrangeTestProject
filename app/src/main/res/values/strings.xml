@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">OrangeTestProject</string>
+    <string name="popular_tab_name">Popular</string>
+    <string name="top_tab_name">Top Rated</string>
+</resources>
