@@ -1,7 +1,8 @@
-package com.orange.test
+package com.orange.test.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.orange.test.R
 
 class MainActivity : AppCompatActivity() {
 

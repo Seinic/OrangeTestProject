@@ -6,8 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.orange.test.R
-import com.orange.test.data.model.Movie
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.orange.test.databinding.FragmentPopularMoviesBinding
 import com.orange.test.ui.movies.MoviesListFragment
 import com.orange.test.util.recycler.MoviesRecyclerViewAdapter
@@ -29,10 +29,32 @@ class PopularMoviesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupRecycler()
+    }
+
+    private fun setupRecycler() {
         val adapter = MoviesRecyclerViewAdapter()
         movies_recycler.adapter = adapter
-        adapter.onItemClick = //TODO refactor
+        adapter.onItemClick =
             { movie -> (parentFragment as MoviesListFragment).navigateToDetails(movie) }
         adapter.notifyDataSetChanged()
+
+        movies_recycler.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                if (dy > 0) {
+                    val layoutManager =
+                        recyclerView.layoutManager as LinearLayoutManager?
+                    val visibleItemCount = layoutManager?.childCount ?: 0
+                    val totalItemCount = layoutManager?.itemCount ?: 0
+                    val pastVisibleItems = layoutManager?.findFirstVisibleItemPosition() ?: 0
+                    if (!viewModel.isLoading.get() && viewModel.page < viewModel.maxPages) {
+                        if (visibleItemCount + pastVisibleItems >= totalItemCount) {
+                            viewModel.loadNextPage()
+                        }
+                    }
+                }
+            }
+        })
     }
 }

@@ -10,10 +10,16 @@ import retrofit2.http.Query
 
 interface MoviesAPI {
     @GET("/3/movie/popular")
-    fun getPopularMovies(@Query("api_key") key: String): Observable<MoviesResult>
+    fun getPopularMovies(
+        @Query("api_key") key: String,
+        @Query("page") page: Int
+    ): Observable<MoviesResult>
 
     @GET("/3/movie/top_rated")
-    fun getTopRatedMovies(@Query("api_key") key: String): Observable<MoviesResult>
+    fun getTopRatedMovies(
+        @Query("api_key") key: String,
+        @Query("page") page: Int
+    ): Observable<MoviesResult>
 
     @GET("/3/movie/{movie_id}")
     fun getMovieDetails(

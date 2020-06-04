@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.orange.test.databinding.FragmentMovieDetailsBinding
 
-class MovieDetailsFragment: Fragment() {
+class MovieDetailsFragment : Fragment() {
     private val viewModel: MovieDetailsViewModel by viewModels()
 
     override fun onCreateView(

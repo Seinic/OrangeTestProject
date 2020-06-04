@@ -9,7 +9,8 @@ import com.orange.test.R
 import com.orange.test.data.model.Movie
 import kotlinx.android.synthetic.main.item_movie.view.*
 
-class MoviesRecyclerViewAdapter : RecyclerView.Adapter<MoviesRecyclerViewAdapter.MoviesHolder>(), BindableAdapter<List<Movie>> {
+class MoviesRecyclerViewAdapter : RecyclerView.Adapter<MoviesRecyclerViewAdapter.MoviesHolder>(),
+    BindableAdapter<List<Movie>> {
 
     var moviesList = emptyList<Movie>()
     var onItemClick: ((Movie) -> Unit)? = null

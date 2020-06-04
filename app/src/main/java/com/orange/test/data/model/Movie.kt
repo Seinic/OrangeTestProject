@@ -1,7 +1,9 @@
 package com.orange.test.data.model
 
 data class MoviesResult(
-    val results: List<Movie>?
+    val results: List<Movie> = emptyList(),
+    val page: Int,
+    val total_pages: Int
 )
 
 data class Movie(
